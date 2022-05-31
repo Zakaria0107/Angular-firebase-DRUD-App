@@ -1,0 +1,69 @@
+<div class="container">
+  <h2 class="h2 mb-4">Clients List</h2>
+</div>
+<div class="pricing-header mx-auto">
+  <div class="no-data text-center" *ngIf="preLoader">
+    <img src="assets/undraw_empty_street_sfxm.svg" class="preloader-icon" alt="No client" />
+  </div>
+  <div class="no-data text-center" *ngIf="noData">
+    <p class="nodata-msg">No client added yet!</p>
+    <img src="assets/undraw_empty_street_sfxm.svg" class="nodata-msg" alt="No client" />
+  </div>
+  <div class="container-fluid" *ngIf="hideWhenNoClient">
+    <table
+      class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg"
+    >
+      <thead>
+        <tr>
+
+          <th scope="col">client name</th>
+          <th scope="col">Address</th>
+          <th scope="col">Room number</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">N neight</th>
+          <th scope="col">Room type</th>
+          <th scope="col">Smooking</th>
+          <th scope="col">Ticket plane reference</th>
+          <th scope="col">Price</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let client of Client
+              | paginate: { itemsPerPage: 8, currentPage: p };
+            let i = index
+          "
+        >
+          <td>{{client.name}} </td>
+          <td>{{client.address}} </td>
+          <td>{{client.roomNumber}} </td>
+          <td>{{client.startDate}} </td>
+          <td>{{client.endDate}} </td>
+          <td>{{client.Nneight}} </td>
+          <td>{{client.roomType}} </td>
+          <td>{{client.smooking}} </td>
+          <td>-{{client.tecketPlaneReference}} </td>
+          <td>{{client.price}} DH</td>
+          <td class="text-center action-block">
+            <span
+              class="mr-2 btn btn-success "
+              routerLink="/edit-client/{{ client.id }}"
+              >Update</span
+            >
+            <span
+              class="mr-2 btn btn-danger"
+              (click)="deleteClient(client)"
+              >Delete</span
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<!--<div class="container center">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>-->
+</div>
